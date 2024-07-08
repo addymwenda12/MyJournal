@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 import mysqlConnection from '../config/db.js';
 
 /* REGISTER USER */

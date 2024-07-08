@@ -2,8 +2,10 @@
   "name": "myjournal",
   "version": "1.0.0",
   "description": "This repository houses a mobile journaling application built with React Native and Node.js. Users can create, edit, and categorize entries, with features like user authentication, summary views, and settings management.",
+  "type": "module",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

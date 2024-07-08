@@ -1,5 +1,5 @@
-const mysqlConnection = require('../database');
-const bcrypt = require('bcrypt');
+import mysqlConnection from '../db/mysql.js';
+import bcrypt from 'bcryptjs';
 
 /* CREATE PROFILE */
 exports.createProfile = async (req, res) => {

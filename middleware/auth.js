@@ -1,11 +1,11 @@
-const jwt = require('jsonwebtoken');
+import { verify } from 'jsonwebtoken';
 
 const verifyToken = (req, res, next) => {
   const token = req.header('Authorization');
   if (!token) return res.status(401).send({ message: 'Access Denied. No token provided' });
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = verify(token, process.env.JWT_SECRET);
     req.user = decoded;
     next();
   } catch (err) {
@@ -13,4 +13,4 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-module.exports = verifyToken;
+export default verifyToken;

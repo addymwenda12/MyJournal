@@ -1,4 +1,4 @@
-const mysqlConnection = require('../config/db');
+import mysqlConnection from '../config/db.js';
 
 /* CREATE JOURNAL */
 exports.createJournal = async (req, res) => {

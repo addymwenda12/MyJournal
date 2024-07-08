@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const { createProfile, getProfile, updateProfile } = require('../controllers/user');
-const verifyToken = require('../middleware/auth');
+import { Router } from 'express';
+const router = Router();
+import { createProfile, getProfile, updateProfile } from '../controllers/user.js';
+import verifyToken from '../middleware/auth.js';
 
 router.put('/profile', verifyToken, createProfile, getProfile, updateProfile)
 
-module.exports = { userRoutes: router };
+export const userRoutes = router;

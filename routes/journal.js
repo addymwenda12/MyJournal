@@ -1,15 +1,14 @@
-const express = require('express');
-const { 
+import { Router } from 'express';
+import { 
   createJournal,
-  getJournals,
-  getJournalById,
+  getJournals, getJournalById,
   updateJournal,
-  deleteJournal
-} = require('../controllers/journal');
-const verifyToken = require('../middleware/auth');
-const { getSummary } = require('../controllers/summary');
+  deleteJournal,
+  getSummary
+} from '../controllers/journal.js';
+import verifyToken from '../middleware/auth.js';
 
-const router = express.Router();
+const router = Router();
 
 router.use(verifyToken);
 
@@ -19,4 +18,4 @@ router.get('/:id', getJournalById);
 router.put('/:id', updateJournal);
 router.delete('/:id', deleteJournal);
 
-module.exports = router;
+export default router;

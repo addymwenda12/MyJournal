@@ -1,6 +1,6 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-const mysqlConnection = require('../config/db');
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import mysqlConnection from '../config/db.js';
 
 /* REGISTER USER */
 export const register = async (req, res) => {

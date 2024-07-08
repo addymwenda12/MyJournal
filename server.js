@@ -1,4 +1,6 @@
 const express = require('express');
+const { register, login } = require('./controllers/auth');
+const { authRoutes } = require('./routes/auth');
 const app = express();
 
 /* DATABASE SETUP */

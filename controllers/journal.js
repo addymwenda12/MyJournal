@@ -124,3 +124,56 @@ exports.deleteJournal = async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 };
+
+/* GET SUMMARY */
+exports.getSummary = async (req, res) => {
+  const { period } = req.query; // 'daily', 'weekly', 'monthly'
+  const userId = req.user.id;
+
+  let startDate, endDate;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Normalize to start of day
+
+  switch (period) {
+    case 'daily':
+      startDate = today;
+      endDate = new Date(today);
+      endDate.setDate(endDate.getDate() + 1);
+      break;
+    case 'weekly':
+      startDate = new Date(today);
+      startDate.setDate(startDate.getDate() - startDate.getDay());
+      endDate = new Date(startDate);
+      endDate.setDate(endDate.getDate() + 7);
+      break;
+    case 'monthly':
+      startDate = new Date(today.getFullYear(), today.getMonth(), 1);
+      endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      break;
+    default:
+      return res.status(400).send({ message: 'Invalid period specified' });
+  }
+
+  // Convert dates to SQL format
+  startDate = startDate.toISOString().slice(0, 19).replace('T', ' ');
+  endDate = endDate.toISOString().slice(0, 19).replace('T', ' ');
+
+  // Fetch summary data from database
+  try {
+    const result = await new Promise((resolve, reject) => {
+      const query = `
+        SELECT COUNT(*) AS entryCount, category
+        FROM journal_entries
+        WHERE userId = ? AND (createdAt BETWEEN ? AND ?)
+        GROUP BY category
+      `;
+      mysqlConnection.query(query, [userId, startDate, endDate], (error, results) => {
+        if (error) reject(error);
+        else resolve(results);
+      });
+    });
+    res.send(result);
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+};

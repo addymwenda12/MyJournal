@@ -4,6 +4,7 @@ import authRoutes from './routes/auth.js';
 import journalRoutes from './routes/journal.js';
 import { userRoutes } from './routes/user.js';
 import verifyToken from './middleware/auth.js';
+import dotenv from 'dotenv';
 
 const app = express();
 

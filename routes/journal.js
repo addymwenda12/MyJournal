@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { 
   createJournal,
-  getJournals, getJournalById,
+  getJournals,
+  getJournalById,
   updateJournal,
   deleteJournal,
   getSummary

@@ -1,7 +1,7 @@
 import mysqlConnection from '../config/db.js';
 
 /* CREATE JOURNAL */
-exports.createJournal = async (req, res) => {
+export const createJournal = async (req, res) => {
   const { title, content, category } = req.body;
   const userId = req.user.id;
 
@@ -23,7 +23,7 @@ exports.createJournal = async (req, res) => {
 };
 
 /* GET JOURNALS */
-exports.getJournals = async (req, res) => {
+export const getJournals = async (req, res) => {
   const userId = req.user.id;
 
   try {
@@ -44,7 +44,7 @@ exports.getJournals = async (req, res) => {
 };
 
 /* GET JOURNAL BY ID */
-exports.getJournalById = async (req, res) => {
+export const getJournalById = async (req, res) => {
   const userId = req.user.id;
   const journalId = req.params.id;
 
@@ -71,7 +71,7 @@ exports.getJournalById = async (req, res) => {
 };
 
 /* UPDATE JOURNAL */
-exports.updateJournal = async (req, res) => {
+export const updateJournal = async (req, res) => {
   const userId = req.user.id;
   const journalId = req.params.id;
   const { title, content, category } = req.body;
@@ -99,7 +99,7 @@ exports.updateJournal = async (req, res) => {
 };
 
 /* DELETE JOURNAL */
-exports.deleteJournal = async (req, res) => {
+export const deleteJournal = async (req, res) => {
   const userId = req.user.id;
   const journalId = req.params.id;
 
@@ -126,7 +126,7 @@ exports.deleteJournal = async (req, res) => {
 };
 
 /* GET SUMMARY */
-exports.getSummary = async (req, res) => {
+export const getSummary = async (req, res) => {
   const { period } = req.query; // 'daily', 'weekly', 'monthly'
   const userId = req.user.id;
 

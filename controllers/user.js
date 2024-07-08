@@ -1,8 +1,8 @@
-import mysqlConnection from '../db/mysql.js';
+import mysqlConnection from '../config/db.js';
 import bcrypt from 'bcryptjs';
 
 /* CREATE PROFILE */
-exports.createProfile = async (req, res) => {
+export const createProfile = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
@@ -28,7 +28,7 @@ exports.createProfile = async (req, res) => {
 };
 
 /* GET PROFILE */
-exports.getProfile = async (req, res) => {
+export const getProfile = async (req, res) => {
   const userId = req.user.id;
 
   try {
@@ -49,7 +49,7 @@ exports.getProfile = async (req, res) => {
 }
 
 /* UPDATE PROFILE */
-exports.updateProfile = async (req, res) => {
+export const updateProfile = async (req, res) => {
   const userId = req.user.id;
   const { name, email, password } = req.body;
 
@@ -86,7 +86,7 @@ async function hashPassword(password) {
 }
 
 /* DELETE PROFILE */
-exports.deleteProfile = async (req, res) => {
+export const deleteProfile = async (req, res) => {
   const userId = req.user.id;
 
   try {

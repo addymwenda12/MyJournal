@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 const mysqlConnection = require('../config/db');
-// import User from "../models/User.js";
 
 /* REGISTER USER */
 export const register = async (req, res) => {
@@ -27,25 +26,42 @@ export const register = async (req, res) => {
     const results = await insertUser();
     res.status(201).send({ message: 'User registered successfully', userId: results.insertId });
   } catch (error) {
-    // Catch any errors that occur during the process
     res.status(500).send({ error: error.message });
   }
 };
 
-/* LOGIN */
+/* LOGIN USER */
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ email: email });
-    if (!user) return res.status(400).json({ msg: "User does not exist" });
+    const { username, password } = req.body;
+
+    const queryUser = () => {
+      return new Promise((resolve, reject) => {
+        mysqlConnection.query('SELECT * FROM users WHERE username = ?', [username], (error, results) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results[0]); // Assuming username is unique
+          }
+        });
+      });
+    };
+
+    const user = await queryUser();
+
+    if (!user) {
+      return res.status(404).send({ message: 'User not found' });
+    }
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
+    if (!isMatch) {
+      return res.status(401).send({ message: 'Invalid credentials' });
+    }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    delete user.password;
-    res.status(200).json({ token, user });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
+
+    res.status(200).send({ message: 'Logged in successfully', token });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
   }
 };

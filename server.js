@@ -2,6 +2,7 @@ const express = require('express');
 const { register, login } = require('./controllers/auth');
 const { authRoutes } = require('./routes/auth');
 const { journalRoutes } = require('./routes/journal');
+const { userRoutes } = require('./routes/user');
 const verifyToken = require('./middleware/auth');
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/auth', authRoutes);
 app.use('/api/journals', verifyToken, journalRoutes);
+app.use('/api/users', verifyToken, userRoutes);
 
 
 app.get('/', (req, res) => {

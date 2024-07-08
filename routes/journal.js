@@ -1,6 +1,13 @@
 const express = require('express');
-const { createJournal, getJournals, getJournalById, updateJournal, deleteJournal } = require('../controllers/journal');
+const { 
+  createJournal,
+  getJournals,
+  getJournalById,
+  updateJournal,
+  deleteJournal
+} = require('../controllers/journal');
 const verifyToken = require('../middleware/auth');
+const { getSummary } = require('../controllers/summary');
 
 const router = express.Router();
 

@@ -1,16 +1,17 @@
-import React from 'react';
-import LoginScreen from '../../screens/LoginScreen';
-import SignUpScreen from '../../screens/SignupScreen'
+import {createStackNavigator} from 'react-navigation-stack';
+import {createAppContainer} from 'react-navigation';
+import Login from '../screens/Login';
+import Register from '../screens/Register'
 
-const Stack = createStackNavigator();
-
-function AuthStackNavigator() {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginScreen} />
-      <Stack.Screen name="SignUp" component={SignUpScreen} />
-    </Stack.Navigator>
-  );
+const stackNavigatorOptions = {
+  headerShown:false
 }
-
-export default AuthStackNavigator;
+const AppNavigator = createStackNavigator({
+  Login:{screen:Login},
+  Register:{screen:Register},
+},
+{
+  defaultNavigationOptions : stackNavigatorOptions
+}  
+);
+export default createAppContainer(AppNavigator);

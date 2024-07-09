@@ -1,50 +1,45 @@
-# Welcome to your Expo app 👋
+# TagebuchApp with ReactNative + Expo CLI
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A simple diary app (prototype) with react native and expo CLI to track your mood. it's filled with dummy data and will become a pure React Native (without Expo) some time soon..
 
-## Get started
+It was an enhancement of a very useful tutorial by TheNetNinja: [tutorial series](https://www.youtube.com/watch?v=ur6I5m2nTvk&list=PL4cUxeGkcC9ixPU-QkScoRBVxtPPzVjrQ&index=1).
 
-1. Install dependencies
 
-   ```bash
-   npm install
-   ```
+## getting started
 
-2. Start the app
+`npm i`
 
-   ```bash
-    npx expo start
-   ```
+`expo start`
 
-In the output, you'll find options to open the app in a
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## How it looks
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### HomeScreen and how to add a new entry (Modal in HomeScreen)
 
-## Get a fresh project
+| HomeScreen: | Modal is empty | Modal: required inputs | Modal filled in | updated Flatlist in HomeScreen |
+|:------------|:---------------|:-----------------------|:----------------|:-------------------------------|
+| <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/01-HomeScreen.png" height="300"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/02-ModalEntryFrom_empty.png" height="300"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/03-ModalEntryForm_required.png" height="300"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/04-ModalEntryForm_with_data.png" height="300"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/05-updated_HomeScreen.png" height="300"> |  |
+| HomeScreen with Flatlist | Modal = EntryForm | required | dummy data inserted ||
 
-When you're ready, run:
+The HomeScreen currently shows all the existing entries. This will change to showing only the most recent entries, e.g. of the current week or month, in the future.. (though, showing everything with dynamic reloading is what Flatlist is about, but my UI feeling said no to this solution)
 
-```bash
-npm run reset-project
-```
+Clicking on the edit 'button' (MaterialCommunityIcon) opens up a Modal to fill in for a new entry. It can be closed by the 'X'. All inputs a required and controlled by Formik (input definition and control) and Yup (ruleSchema). The HomeScreen will be updated accordingly. There is no data saving, yet, so reloading the App will make it forget the added entries.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+### Drawer Navigation and the other screens
 
-To learn more about developing your project with Expo, look at the following resources:
+| Drawer Navigation | AboutScreen | CalendarView (current month) | Calender (last month)  | Info on CalendarView (Modal) | HomeScreen: EntryDetails |
+|:------------------|:------------|:-----------------------------|:-----------------------|:-----------------------------|:-------------------------|
+| <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/06-DrawerNavigation.png" height="200"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/07-AboutScreen.png" height="200"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/08-CalendarView.png" height="200"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/09-CalendarView_last_month.png" height="200"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/10-ModalCalendarInfo.png" height="200"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/09-CalendarView_last_month.png" height="200"> | <img src="https://github.com/anneKoethke/tagebuch/blob/master/assets/examplePics/11-EntryDetails.png" height="200"> |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
+The Routing via AppNavigator has a DrawerNavigation (HomeStack, AboutStack, CalendarStack) with a nested StackNavigation (HomeScreen, EntryDetails).
 
-Join our community of developers creating universal apps.
+The CalendarView has an informational Modal and shows (as dummy data) the dates with entries (green circle around the date) and the moods (differently colored dots under the specific date). Currently there is no connection between data in HomeScreen and Data in CalnedarView. Just checking things out here...
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## History
+
+This is actually a remodelling of the **ThinkNegative App**, a team project at university to learn programming in Android Studio (Java). ;)
+
+*...don't we all have a toDo-App in every language learned...*

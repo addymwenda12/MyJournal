@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import AppNavigator from '../components/navigation/AuthStackNavigator';
 import * as Font from 'expo-font';
 import AppLoading from 'expo';
-import { isRequired } from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedImageStylePropTypes';
+// import { isRequired } from 'react-native/Libraries/DeprecatedPropTypes/DeprecatedImageStylePropTypes';
 
 export default class App extends React.Component {
   state = {
@@ -13,9 +13,9 @@ export default class App extends React.Component {
 
   async componentDidMount(){
     await Font.loadAsync({
-      'SemiBold': require('../assets/fonts/Montserrat-SemiBold.ttf'),
-      'Regular': require('../assets/fonts/Montserrat-Regular.ttf'),
-      'Medium': require('../assets/fonts/Montserrat-Medium.ttf'),
+      'SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
+      'Regular': require('../assets/fonts/Poppins-Regular.ttf'),
+      'Medium': require('../assets/fonts/Poppins-Medium.ttf'),
     });
     this.setState({ isFontLoaded: true });
   }

@@ -18,7 +18,7 @@ This application allows users to create, manage, and reflect on their personal j
 
 - **Mobile App**: React Native with TypeScript
 - **Backend**: Node.js, Express, TypeScript
-- **Database**: PostgreSQL
+- **Database**: MySQL
 - **Authentication**: JWT
 
 ## Getting Started
@@ -48,7 +48,7 @@ npm install
 
 4. Set up the database:
 ```sql
-psql -U your_username -d your_database -a -f schema.sql
+mysql -u your_username -p your_database < schema.sql
 ```
 5. Start the server:
 ```bash
